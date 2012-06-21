@@ -16,7 +16,7 @@ while( $start < $NUMBER_FOUND ) {
 	my $url = 'http://search.maven.org/solrsearch/select?q=.pom&rows=' . $PER_PAGE . '&wt=json&start=' . $start;
 	my $end = $start + $PER_PAGE - 1;
 
-	my $wget = "wget -O 'json/$start-$end.json' $url";
+	my $wget = "wget -q -O 'json/$start-$end.json' '$url'";
 
 	print $wget, "\n";
 	system $wget;
