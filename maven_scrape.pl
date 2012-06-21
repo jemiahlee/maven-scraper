@@ -19,7 +19,7 @@ my $json_ref = decode_json $json_string;
 
 die "Did not get valid JSON!" unless $json_ref;
 
-foreach my $package (@{$json_ref->{response}{docs}}[0..2]) {
+foreach my $package (@{$json_ref->{response}{docs}}) {
   my $url = construct_url($package);
   sleep 2;
 
@@ -42,6 +42,5 @@ sub construct_url {
 
   my $filename = $artifact . '-' . $version . $package_info->{ec}[0];
 
-  { path => $path, wget => "wget -O '$path/$filename' -q http://search.maven.org/remotecontent?filepath=${path}/${artifact}/${version}/${filename}" }
+  { path => $path, wget => "wget -O '$path/$filename' -q 'http://search.maven.org/remotecontent?filepath=${path}/${artifact}/${version}/${filename}'" }
 }
-
